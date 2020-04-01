@@ -1,17 +1,14 @@
 import React from 'react';
 
-import PortfolioItem from "./portfolio-item";
 
-export default class PortfolioContainer extends Component {}
+export default function () {
   // State
   // Lifecycle hooks
-  render() {
+
       return (
           <div>
             <h2>Portfolio items go here updated...</h2>
 
-            <PortfolioItem />
           </div>
         );
     }
-}
