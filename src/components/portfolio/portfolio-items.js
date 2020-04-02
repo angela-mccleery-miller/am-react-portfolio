@@ -1,14 +1,17 @@
 import React from 'react';
 
 
-export default function () {
+export default function(props) {
+  console.log(props.title);
+
   // State
   // Lifecycle hooks
 
-      return (
-          <div>
-            <h2>Portfolio items go here updated...</h2>
+  return (
+    <div>
+        <h3>{props.title}</h3>
+        <h4>{props.url}</h4>
 
-          </div>
-        );
-    }
+    </div>
+    );
+}
