@@ -2,7 +2,7 @@ import React from 'react';
 
 
 export default function(props) {
-  console.log(props.title);
+  // console.log(props.title);
 
   // State
   // Lifecycle hooks
