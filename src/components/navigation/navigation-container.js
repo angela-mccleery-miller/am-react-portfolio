@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+
 export default class NavigationComponent extends Component {
   constructor() {
     super()
@@ -13,11 +14,14 @@ export default class NavigationComponent extends Component {
         Home
       </NavLink>
 
-      <NavLink to="/about-me">About</NavLink>
-      <a href="/">Wrong Home</a>
+      <NavLink to="/about-me" activeClassName="nav-link-active">About</NavLink>
+      <NavLink to="/contact" activeClassName="nav-link-active">Contact</NavLink>
+      <NavLink to="/blog" activeClassName="nav-link-active">Blog</NavLink>
+
+      {/* <a href="/">Wrong Home</a>
         <button>Contact</button>
         <button>Blog</button>
-        <button>Add Blog</button>
+        <button>Add Blog</button> */}
         {false ? <button>Add Blog</button> : null }
       </div>
     );
