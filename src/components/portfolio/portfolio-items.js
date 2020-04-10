@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 export default function(props) {
+// Data that we'll need:
+    // - background image: thumb_image_url
+    // - logo
+    // - description: description
+    // - id: id
+    // - in inspect console: Object.key(item)
+    // - "position", "thumb_image_url", "banner_image_url:"
+
+    const { id, name, description, thumb_image_url, logo } = props.item
+
   // console.log(props.title);
 
   // State
@@ -9,9 +19,12 @@ export default function(props) {
 
   return (
     <div>
-        <h3>{props.name}</h3>
-        <h4>{props.url}</h4>
-        <Link to={`/portfolio/${props.slug}`}>Link</Link>
+    <img src={thumb_image_url} />
+    <img src={logo} />
+        <h3>{name}</h3>
+        <div>{description}</div>
+        <Link to={`/portfolio/${id}`}>Link</Link>
+    
     </div>
-    );
+  );
 }
