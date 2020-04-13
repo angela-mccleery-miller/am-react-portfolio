@@ -10,7 +10,7 @@ export default function(props) {
     // - in inspect console: Object.key(item)
     // - "position", "thumb_image_url", "banner_image_url:"
 
-    const { id, name, description, thumb_image_url, logo } = props.item
+    const { id, name, description, thumb_image_url, logo_url } = props.item
 
   // console.log(props.title);
 
@@ -18,13 +18,23 @@ export default function(props) {
   // Lifecycle hooks
 
   return (
-    <div>
-    <img src={thumb_image_url} />
-    <img src={logo} />
-        <h3>{name}</h3>
-        <div>{description}</div>
-        <Link to={`/portfolio/${id}`}>Link</Link>
-    
-    </div>
+    <div className="portfolio-item-wrapper">
+        <div
+          className="portfolio-img-background"
+          style={{
+            backgroundImage: "url(" + thumb_image_url + ")"
+          }}
+        />
+
+
+      <div className="img-text-wrapper">
+        <div className="logo-wrapper">
+          <img src={logo_url} />
+        </div>
+
+        <div className="subtitle">{description}</div>
+        </div>
+
+      </div>
   );
 }

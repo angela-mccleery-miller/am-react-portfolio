@@ -8,7 +8,7 @@ export default class PortfolioContainer extends Component {
     super();
 
     this.state = {
-      pageTitle: "Welcome to my portfolio",
+      // pageTitle: "Welcome to my portfolio",
       isLoading: false,
       data: []
     //     { title: "Quip", category: "eCommerce", slug: 'quip' },
@@ -52,7 +52,7 @@ export default class PortfolioContainer extends Component {
    
     return this.state.data.map(item => {
       // debugger;
-      return (<PortfolioItem key={item.id} item={item} name={item.title} url={item.url} slug={item.id} />
+      return (<PortfolioItem key={item.id} item={item} name={item.name} url={item.url} slug={item.id} />
       );
     });
   }
@@ -82,8 +82,11 @@ export default class PortfolioContainer extends Component {
           Enterprise
         </button>
 
+        <div className="portfolio-items-wrapper">
+   
         {this.portfolioItems()}
       </div>
+     </div>
     );
   }
 }
