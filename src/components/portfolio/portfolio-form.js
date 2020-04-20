@@ -145,7 +145,7 @@ handleSubmit(event) {
         return (
         
           <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
-           <div>
+           <div className="two-column">
             <input 
                 type="text"
                 name="name"
@@ -165,7 +165,7 @@ handleSubmit(event) {
 
          
 
-          <div>
+          <div className="two-column">
             <input 
                 type="text"
                 name="position"
@@ -173,10 +173,7 @@ handleSubmit(event) {
                 value={this.state.position}
                 onChange={this.handleChange}
             />
-          </div>
-
-
-          <div>
+      
             <select 
                 name="category"
                 value={this.state.category}
@@ -192,7 +189,7 @@ handleSubmit(event) {
           </div>
 
 
-          <div>
+          <div className="one-column">
             <textarea 
                 type="text"
                 name="description"
@@ -204,29 +201,37 @@ handleSubmit(event) {
 
        
 
-            <div className="image-uploaders">
+          <div className="image-uploaders">
             <DropzoneComponent
-            ref={this.thumbRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleThumbDrop()}
-            />
-             <DropzoneComponent
-            ref={this.bannerRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleBannerDrop()}
-            />
-             <DropzoneComponent
-            ref={this.thumbRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleLogoDrop()}
-            />
+                ref={this.thumbRef}
+                config={this.componentConfig()}
+                djsConfig={this.djsConfig()}
+                eventHandlers={this.handleThumbDrop()}
+            >
+                <div className="dz-message">Thumbnail</div>
+            </DropzoneComponent>
+
+            <DropzoneComponent
+                ref={this.bannerRef}
+                config={this.componentConfig()}
+                djsConfig={this.djsConfig()}
+                eventHandlers={this.handleBannerDrop()}
+            >
+                <div className="dz-message">Banner</div>
+            </DropzoneComponent>
+
+            <DropzoneComponent
+                ref={this.thumbRef}
+                config={this.componentConfig()}
+                djsConfig={this.djsConfig()}
+                eventHandlers={this.handleLogoDrop()}
+            >
+               <div className="dz-message">Logo</div>
+            </DropzoneComponent>
             </div>
 
            <div>
-         <button type="submit">Save</button>
+         <button className="btn" type="submit">Save</button>
        </div>
      </form>
     );
