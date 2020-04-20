@@ -8,14 +8,13 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errorText: "",
+      errorText: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-    
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -33,20 +32,23 @@ export default class Login extends Component {
             password: this.state.password
           }
         },
-            { withCredentials: true }
+        { withCredentials: true }
       )
       .then(response => {
-        if (response.data.status === 'created') {
-            console.log("You can come in...")
+        if (response.data.status === "created") {
+          this.props.handleSuccessfulAuth();
         } else {
-            this.setState({
-                errorText: "Wrong email or password"
-            })
-        }      
-        }).catch(error => {
+          this.setState({
+            errorText: "Wrong email or password"
+          });
+          this.props.handleUnsuccessfulAuth();
+        }
+      })
+      .catch(error => {
         this.setState({
-            errorText: "An error occurred"
-        })
+          errorText: "An error occurred"
+        });
+        this.props.handleUnsuccessfulAuth();
       });
 
     event.preventDefault();
