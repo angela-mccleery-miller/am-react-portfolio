@@ -228,6 +228,7 @@ handleSubmit(event) {
             >
                <div className="dz-message">Logo</div>
             </DropzoneComponent>
+            
             </div>
 
            <div>
