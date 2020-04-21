@@ -135,7 +135,7 @@ handleSubmit(event) {
     })
 
     .catch(error => {
-        console.log("portfolio form handleSubmit error", error);
+        console.log("handleDeleteClick error", error);
     });
    
 
