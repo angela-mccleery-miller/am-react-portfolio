@@ -19,7 +19,11 @@ export default class PortfolioForm extends Component {
             url: "",
             thumb_image: "",
             banner_image: "",
-            logo: ""
+            logo: "",
+            editMode: false,
+            apiUrl: "https://angelamiller.devcamp.space/portfolio/portfolio_items",  
+            apiAction: 'post'
+            
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,6 +39,37 @@ export default class PortfolioForm extends Component {
 
     }
 
+    componentDidUpdate() {
+        if (Object.keys(this.props.portfolioToEdit).length > 0) {
+            const {
+                id,
+                name,
+                description,
+                category,
+                position,
+                url,
+                thum_image_url,
+                banner_image_url,
+                logo_url
+            } = this.props.portfolioToEdit;
+
+            this.props.clearPortfolioToEdit();
+
+            this.setState({
+                id: id,
+                name: name || "",
+                description: description || "",
+                category: category || "eCommerce",
+                position: position || "",
+                url: url || "",
+                editMode: true,
+                apiUrl: `https://angelamiller.devcamp.space/portfolio/portfolio_items/${id}`,  
+                apiAction: "patch"
+
+                })
+
+        }
+    }
     
     
     handleThumbDrop() {
@@ -97,26 +132,36 @@ export default class PortfolioForm extends Component {
        return formData;
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
+handleChange(event) {
+    this.setState({
+        [event.target.name]: event.target.value
+    });
 
 }
 
 handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    axios({
+        method: this.state.apiAction,
+        url: this.state.apiUrl,
+        data: this.buildForm(),
+        withCredentials: true
+    })
+
 
     // https://angelamiller.devcamp.space/portfolio/portfolio_items
-    axios
-    .post(
-        "https://angelamiller.devcamp.space/portfolio/portfolio_items",  
-        this.buildForm(), 
-        { withCredentials: true}
-    )
+    // axios
+    // .post(
+    //     "https://angelamiller.devcamp.space/portfolio/portfolio_items",  
+    //     this.buildForm(), 
+    //     { withCredentials: true}
+    // )
     .then(response => {
-        this.props.handleSuccessfulFormSubmission(response.data.portfolio_item)
-        // console.log("response", response);
+        if (this.state.editMode) {
+            this.props.handleEditFormSubmission();
+        }else {
+            this.props.handleNewFormSubmission(response.data.portfolio_item)
+        }
 
         this.setState({
             name: "",
@@ -126,7 +171,10 @@ handleSubmit(event) {
             url: "",
             thumb_image: "",
             banner_image: "",
-            logo: ""
+            logo: "",
+            editMode: false,
+            apiUrl: `https://angelamiller.devcamp.space/portfolio/portfolio_items/${id}`,  
+            apiAction: "post"
         });
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {

@@ -6,8 +6,36 @@
       width: 100%;
     }
 
-    .title {
+      .text-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+      }
+   .title {
       color: $offwhite;
+      font-size: 1.5em;
     }
+
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 15px;
+
+
+    .action-icon {
+      cursor: pointer;
+      color: $offwhite;
+      font-size: 1.5em;
+      transition: 0.1s ease-in-out;
+
+
+      &:hover {
+        color: $warning;
+      }
+    }
+    }
+
   }
 }
