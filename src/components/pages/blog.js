@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-
-
 import BlogItem from "../blog/blog-item";
 import BlogModal from "../modals/blog-modal";
 
@@ -24,7 +22,16 @@ class Blog extends Component {
     window.addEventListener("scroll", this.onScroll, false);
     this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(
+      this
+    );
+  }
 
+  handleSuccessfulNewBlogSubmission(blog) {
+    this.setState({
+      blogModalIsOpen: false,
+      blogItems: [blog].concat(this.state.blogItems)
+    });
   }
 
   handleModalClose() {
@@ -40,20 +47,20 @@ class Blog extends Component {
   }
 
   onScroll() {
-      if (
-        this.state.isLoading ||
-        this.state.blogItems.length === this.state.totalCount
-      ) {
-        return;
-      }
-
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        this.getBlogItems();
-      }
+    if (
+      this.state.isLoading ||
+      this.state.blogItems.length === this.state.totalCount
+    ) {
+      return;
     }
+
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      this.getBlogItems();
+    }
+  }
 
   getBlogItems() {
     this.setState({
@@ -69,7 +76,7 @@ class Blog extends Component {
         }
       )
       .then(response => {
-        console.log("getting", response.data);
+        console.log("gettting", response.data);
         this.setState({
           blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
@@ -86,7 +93,7 @@ class Blog extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScroll, false)
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   render() {
@@ -96,17 +103,19 @@ class Blog extends Component {
 
     return (
       <div className="blog-container">
-
-        <BlogModal 
+        <BlogModal
+          handleSuccessfulNewBlogSubmission={
+            this.handleSuccessfulNewBlogSubmission
+          }
           handleModalClose={this.handleModalClose}
-          modalIsOpen={this.state.blogModalIsOpen} 
-          />
-
-          <div className="new-blog-link">
+          modalIsOpen={this.state.blogModalIsOpen}
+        />
+        {this.props.loggedInStatus === "LOGGED_IN" ? 
+        <div className="new-blog-link">
           <a onClick={this.handleNewBlogClick}>
-            Open Modal!
+            <FontAwesomeIcon icon="plus-circle" />
           </a>
-        </div>
+        </div> : null }
 
         <div className="content-container">{blogRecords}</div>
 
