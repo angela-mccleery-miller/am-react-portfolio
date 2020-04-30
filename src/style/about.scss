@@ -1,11 +1,10 @@
 .about-page-wrapper {
+    width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: calc(100vh - 84px);
 }
-
 .left-column {
-    
     background-size: cover;
     width: 50%;
     height: 100%;
@@ -18,26 +17,28 @@
 
 .right-column{
     display: block;
+    // display: flex;
     justify-content: center;
     align-items: center;
     background-color: $offwhite;
+    padding: 100px;
 
-    h1 {
-        justify-content: center;
-        align-items: left;
-        margin-top: 20%;
-        padding-left: 50px;
-        padding-right: 50px;
+    // h1 {
+    //     justify-content: center;
+    //     align-items: left;
+    //     margin-top: 20%;
+    //     padding-left: 50px;
+    //     padding-right: 50px;
 
 
-    }
+    // }
 
-    p {
-        justify-content: center;
-        align-items: center;
-        padding-left: 50px;
-        padding-right: 50px;
+    // p {
+    //     justify-content: center;
+    //     align-items: center;
+    //     padding-left: 50px;
+    //     padding-right: 50px;
 
-    }
+    // }
 
 }

@@ -20,7 +20,6 @@ export default class PortfolioItem extends Component {
 
   handleMouseEnter() {
     this.setState({portfolioItemClass: "image-blur"})
-
   }
 
   handleMouseLeave() {
@@ -36,6 +35,7 @@ export default class PortfolioItem extends Component {
   // Lifecycle hooks
 
   return (
+    <Link to={`/portfolio/${id}`}>
     <div className="portfolio-item-wrapper"
     onMouseEnter={() => this.handleMouseEnter()}
     onMouseLeave={() => this.handleMouseLeave()}
@@ -59,6 +59,7 @@ export default class PortfolioItem extends Component {
         </div>
 
       </div>
-  );
+     </Link>
+    );
   }
 }
